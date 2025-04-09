@@ -16,7 +16,11 @@ public class SignUpActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up);
 
         int secretKey = getIntent().getIntExtra("SECRET_KEY", 0);
-        
+        if (secretKey != 99) {
+            finish();
+        }
+
+
 
     }
 }
