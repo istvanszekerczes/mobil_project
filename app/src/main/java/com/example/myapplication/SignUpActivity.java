@@ -1,6 +1,7 @@
 package com.example.myapplication;
 
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,5 +23,12 @@ public class SignUpActivity extends AppCompatActivity {
 
 
 
+    }
+
+    public void login(View view) {
+        finish();
+    }
+
+    public void signUp(View view) {
     }
 }
