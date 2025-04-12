@@ -9,4 +9,9 @@
     <string name="ball">Ball</string>
     <string name="ready_to_join_the_team_let_s_get_you_signed_up">Ready to join the team? Let’s get you signed up!</string>
     <string name="password_again">Password Again</string>
+    <string name="back">Back</string>
+    <string name="construction_sign">Construction Sign</string>
+    <string name="this_page_is_currently_under_development">This page is currently under development.</string>
+    <string name="logout">Logout</string>
+    <string name="exit">Exit</string>
 </resources>

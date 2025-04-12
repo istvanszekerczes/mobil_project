@@ -8,7 +8,6 @@
     android:padding="32dp"
     tools:context=".SignUpActivity">
 
-    <!-- Bal oldal: Kép + szöveg -->
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
@@ -24,7 +23,7 @@
             android:contentDescription="@string/ball" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingTop="16dp"
@@ -36,7 +35,6 @@
             android:gravity="center" />
     </LinearLayout>
 
-    <!-- Jobb oldal: Beviteli mezők + gombok -->
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
@@ -57,7 +55,6 @@
                 android:gravity="center_horizontal"
                 android:padding="16dp">
 
-                <!-- Email beviteli mező -->
                 <EditText
                     android:id="@+id/editTextEmail"
                     android:layout_width="match_parent"
@@ -70,7 +67,6 @@
                     android:padding="16dp"
                     android:textSize="16sp" />
 
-                <!-- Felhasználónév beviteli mező -->
                 <EditText
                     android:id="@+id/editTextUsername"
                     android:layout_width="match_parent"
@@ -83,7 +79,6 @@
                     android:padding="16dp"
                     android:textSize="16sp" />
 
-                <!-- Jelszó beviteli mező -->
                 <EditText
                     android:id="@+id/editTextPassword"
                     android:layout_width="match_parent"
@@ -96,7 +91,6 @@
                     android:padding="16dp"
                     android:textSize="16sp" />
 
-                <!-- Jelszó megerősítése beviteli mező -->
                 <EditText
                     android:id="@+id/editTextPasswordAgain"
                     android:layout_width="match_parent"
@@ -109,7 +103,6 @@
                     android:padding="16dp"
                     android:textSize="16sp" />
 
-                <!-- Gombok egymás mellett -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
@@ -132,14 +125,14 @@
                         android:textSize="18sp" />
 
                     <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/loginButton"
+                        android:id="@+id/exitButton"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:layout_marginStart="8dp"
                         android:background="@drawable/btn_green"
-                        android:onClick="login"
-                        android:text="@string/login"
+                        android:onClick="back"
+                        android:text="@string/back"
                         android:textColor="#FFFFFF"
                         android:textSize="18sp" />
                 </LinearLayout>

@@ -7,64 +7,51 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
+import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 
-public class SignUpActivity extends AppCompatActivity {
-    EditText emailEditText;
-    EditText usernameEditText;
-    EditText passwordEditText;
-    EditText passwordAgainEditText;
+public class FootballPageActivity extends AppCompatActivity {
+
     private SharedPreferences sharedPreferences;
-    private static final String PREF_KEY = SignUpActivity.class.getPackage().toString();
-    private static final String LOG_TAG = SignUpActivity.class.getName();
+    private static final String PREF_KEY = FootballPageActivity.class.getPackage().toString();
+    private static final String LOG_TAG = FootballPageActivity.class.getName();
     private static final int SECRET_KEY = 99;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_up);
+        setContentView(R.layout.activity_football_page);
 
         int secretKey = getIntent().getIntExtra("SECRET_KEY", 0);
         if (secretKey != SECRET_KEY) {
             finish();
         }
-        emailEditText = findViewById(R.id.editTextEmail);
-        usernameEditText = findViewById(R.id.editTextUsername);
-        passwordEditText = findViewById(R.id.editTextPassword);
-        passwordAgainEditText = findViewById(R.id.editTextPasswordAgain);
-
-        sharedPreferences = getSharedPreferences(PREF_KEY, MODE_PRIVATE);
-        String username =  sharedPreferences.getString("username", "");
-
-        usernameEditText.setText(username);
-
 
         Log.i(LOG_TAG, "onCreate");
-    }
-    public void signUp(View view) {
-        String email = emailEditText.getText().toString();
-        String username = usernameEditText.getText().toString();
-        String password = passwordEditText.getText().toString();
-        String passwordAgain = passwordAgainEditText.getText().toString();
 
-        if (!password.equals(passwordAgain)) {
-            Log.e(LOG_TAG, "Passwords do not match!");
-            return;
-        }
+        sharedPreferences = getSharedPreferences(PREF_KEY, MODE_PRIVATE);
 
-        Log.i(LOG_TAG, "Signed up succesfully " + username);
+        String username =  sharedPreferences.getString("username", "");
 
-        goToFootballPage();
+
 
     }
 
-    public void back(View view) {
-        finish();
+    public void exit(View view) {
+        finishAffinity();
     }
 
-    public void goToFootballPage(/* registered user data */) {
-        Intent intent = new Intent(this, FootballPageActivity.class);
+    public void logout(View view) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.clear();
+        editor.apply();
+
+        Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra("SECRET_KEY", SECRET_KEY);
+
         startActivity(intent);
     }
 
@@ -103,4 +90,6 @@ public class SignUpActivity extends AppCompatActivity {
         super.onRestart();
         Log.i(LOG_TAG, "onRestart ");
     }
+
+
 }

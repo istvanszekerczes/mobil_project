@@ -1,0 +1,30 @@
+
+{
+  "project_info": {
+    "project_number": "220319635988",
+    "project_id": "mobile-dev-project-cefa5",
+    "storage_bucket": "mobile-dev-project-cefa5.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:220319635988:android:00c4d7fd6bbe17fc136501",
+        "android_client_info": {
+          "package_name": "com.example.myapplication"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBA89RVNsDsEY0tZkno-iGCt6O8VeylPuQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

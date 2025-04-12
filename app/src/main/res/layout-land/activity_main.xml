@@ -15,7 +15,6 @@
         android:padding="32dp"
         tools:context=".MainActivity">
 
-        <!-- Bal oldal: logó + szöveg -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -32,7 +31,7 @@
                 android:src="@drawable/ball" />
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"

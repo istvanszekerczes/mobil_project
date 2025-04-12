@@ -22,7 +22,7 @@
         app:layout_constraintVertical_bias="0.2" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -52,7 +52,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
         app:layout_constraintVertical_bias="0.045"
         tools:ignore="TextFields" />
 
@@ -90,8 +90,6 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextUsername"
         app:layout_constraintVertical_bias="0.05" />
 
-    <!-- Password Again EditText -->
-
     <EditText
         android:id="@+id/editTextPasswordAgain"
         android:layout_width="300dp"
@@ -128,15 +126,15 @@
         app:layout_constraintVertical_bias="0.1" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/loginButton"
+        android:id="@+id/exitButton"
         android:layout_width="150dp"
         android:layout_height="60dp"
         android:layout_marginBottom="40dp"
         android:background="@drawable/btn_green"
         android:gravity="center"
-        android:onClick="login"
+        android:onClick="back"
         android:padding="10dp"
-        android:text="@string/login"
+        android:text="@string/back"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"

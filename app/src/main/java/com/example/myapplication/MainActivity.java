@@ -37,10 +37,17 @@ public class MainActivity extends AppCompatActivity {
 
 
         String username = usernameEditText.getText().toString();
-        String password = passwordEditText.getText().toString();
         Log.i(LOG_TAG, "Logged in succesfully " + username);
 
         //TODO: Login befejezese
+
+        goToFootballPage();
+    }
+
+    public void goToFootballPage(/* registered user data */) {
+        Intent intent = new Intent(this, FootballPageActivity.class);
+        intent.putExtra("SECRET_KEY", SECRET_KEY);
+        startActivity(intent);
     }
 
     public void signUp(View view) {
