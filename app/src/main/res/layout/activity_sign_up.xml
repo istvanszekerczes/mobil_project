@@ -46,6 +46,8 @@
 
         <EditText
             android:id="@+id/editTextEmail"
+            android:textColor="#000000"
+            android:textColorHint="#899499"
             android:layout_width="300dp"
             android:layout_height="60dp"
             android:background="@drawable/edittext_background"
@@ -64,6 +66,8 @@
 
         <EditText
             android:id="@+id/editTextUsername"
+            android:textColor="#000000"
+            android:textColorHint="#899499"
             android:layout_width="300dp"
             android:layout_height="60dp"
             android:background="@drawable/edittext_background"
@@ -81,6 +85,8 @@
 
         <EditText
             android:id="@+id/editTextPassword"
+            android:textColor="#000000"
+            android:textColorHint="#899499"
             android:layout_width="300dp"
             android:layout_height="60dp"
             android:background="@drawable/edittext_background"
@@ -98,6 +104,8 @@
 
         <EditText
             android:id="@+id/editTextPasswordAgain"
+            android:textColor="#000000"
+            android:textColorHint="#899499"
             android:layout_width="300dp"
             android:layout_height="60dp"
             android:background="@drawable/edittext_background"
