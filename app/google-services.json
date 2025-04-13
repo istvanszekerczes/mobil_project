@@ -1,4 +1,3 @@
-
 {
   "project_info": {
     "project_number": "220319635988",
@@ -13,7 +12,20 @@
           "package_name": "com.example.myapplication"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "220319635988-2klqno64ra9rq8q1tfidfh5jdbiqvc2t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.myapplication",
+            "certificate_hash": "a26b1102dbbc2277b036a32a7aa21b1ab75c0446"
+          }
+        },
+        {
+          "client_id": "220319635988-2o8hctr6iac316gl8thld54r0m6rvedp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyBA89RVNsDsEY0tZkno-iGCt6O8VeylPuQ"
@@ -21,7 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "220319635988-2o8hctr6iac316gl8thld54r0m6rvedp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

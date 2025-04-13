@@ -14,4 +14,5 @@
     <string name="this_page_is_currently_under_development">This page is currently under development.</string>
     <string name="logout">Logout</string>
     <string name="exit">Exit</string>
+    <string name="guest">Guest</string>
 </resources>

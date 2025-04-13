@@ -3,14 +3,27 @@ package com.example.myapplication;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+
 public class MainActivity extends AppCompatActivity {
-    EditText usernameEditText;
+    private FirebaseAuth firebaseAuth;
+    EditText emailEditText;
     EditText passwordEditText;
 
     private SharedPreferences sharedPreferences;
@@ -23,30 +36,61 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        usernameEditText = findViewById(R.id.editTextUsername);
+        emailEditText = findViewById(R.id.editTextEmail);
         passwordEditText = findViewById(R.id.editTextPassword);
 
         Log.i(LOG_TAG, "onCreate");
 
         sharedPreferences = getSharedPreferences(PREF_KEY, MODE_PRIVATE);
 
+        firebaseAuth = FirebaseAuth.getInstance();
 
     }
 
     public void login(View view) {
+        String email = emailEditText.getText().toString();
+        String password = passwordEditText.getText().toString();
+
+        if (email.isEmpty() || password.isEmpty()) {
+            Toast.makeText(this, "Please fill in both email and password!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+                    Log.d(LOG_TAG, "User logged in successfully!");
+                    goToFootballPage();
+                } else {
+                    Log.d(LOG_TAG, "User wasn't logged in succesfully!");
+                    Toast.makeText(MainActivity.this, "Incorrect credentials. Please try again!", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
 
 
-        String username = usernameEditText.getText().toString();
-        Log.i(LOG_TAG, "Logged in succesfully " + username);
 
-        //TODO: Login befejezese
-
-        goToFootballPage();
+        Log.i(LOG_TAG, "Logged in succesfully " + email);
     }
 
-    public void goToFootballPage(/* registered user data */) {
+    public void loginAsGuest(View view) {
+        firebaseAuth.signInAnonymously().addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+                    Log.d(LOG_TAG, "Anonymous user logged in successfully!");
+                    goToFootballPage();
+                } else {
+                    Log.d(LOG_TAG, "Anonymous user wasn't logged in succesfully!");
+                    Toast.makeText(MainActivity.this, "User wasn't created succesfully: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+    }
+
+    public void goToFootballPage() {
         Intent intent = new Intent(this, FootballPageActivity.class);
-        intent.putExtra("SECRET_KEY", SECRET_KEY);
         startActivity(intent);
     }
 
@@ -79,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("username", usernameEditText.getText().toString());
+        editor.putString("email", emailEditText.getText().toString());
         editor.apply();
 
         Log.i(LOG_TAG, "onPause");
@@ -89,6 +133,18 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         Log.i(LOG_TAG, "onResume ");
+
+        ImageView imageView = findViewById(R.id.imageView);
+
+        Handler handler = new Handler();
+
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Animation rotateAnimation = AnimationUtils.loadAnimation(MainActivity.this, R.anim.rotate);
+                imageView.startAnimation(rotateAnimation);
+            }
+        }, 1000);
     }
 
     @Override

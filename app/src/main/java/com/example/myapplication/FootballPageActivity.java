@@ -13,7 +13,12 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.firebase.Firebase;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 public class FootballPageActivity extends AppCompatActivity {
+    private FirebaseUser user;
 
     private SharedPreferences sharedPreferences;
     private static final String PREF_KEY = FootballPageActivity.class.getPackage().toString();
@@ -25,16 +30,16 @@ public class FootballPageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_football_page);
 
-        int secretKey = getIntent().getIntExtra("SECRET_KEY", 0);
-        if (secretKey != SECRET_KEY) {
-            finish();
-        }
-
         Log.i(LOG_TAG, "onCreate");
 
-        sharedPreferences = getSharedPreferences(PREF_KEY, MODE_PRIVATE);
+        user = FirebaseAuth.getInstance().getCurrentUser();
 
-        String username =  sharedPreferences.getString("username", "");
+        if (user != null) {
+            Log.d(LOG_TAG, "Authenticated user.");
+        } else {
+            Log.d(LOG_TAG, "Unauthenticated user.");
+            finish();
+        }
 
 
 
@@ -45,14 +50,14 @@ public class FootballPageActivity extends AppCompatActivity {
     }
 
     public void logout(View view) {
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.clear();
-        editor.apply();
+        FirebaseAuth.getInstance().signOut();
 
         Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra("SECRET_KEY", SECRET_KEY);
+
+        Log.i(LOG_TAG, "Logged out successfully!");
 
         startActivity(intent);
+        finish();
     }
 
     @Override
