@@ -33,7 +33,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_log_in);
 
         emailEditText = findViewById(R.id.editTextEmail);
         passwordEditText = findViewById(R.id.editTextPassword);
@@ -89,7 +89,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void goToFootballPage() {
-        Intent intent = new Intent(this, FootballPageActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 

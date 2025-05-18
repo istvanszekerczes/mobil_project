@@ -1,5 +1,6 @@
 [versions]
 agp = "8.9.1"
+appcompatVersion = "1.7.0"
 cardview = "1.0.0"
 firebaseBom = "33.12.0"
 firebaseFirestore = "25.1.4"
@@ -16,6 +17,7 @@ recyclerview = "1.4.0"
 recyclerviewSelection = "1.1.0"
 
 [libraries]
+appcompat-v170 = { module = "androidx.appcompat:appcompat", version.ref = "appcompatVersion" }
 cardview = { module = "androidx.cardview:cardview", version.ref = "cardview" }
 firebase-auth = { module = "com.google.firebase:firebase-auth" }
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }

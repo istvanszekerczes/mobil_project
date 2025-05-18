@@ -47,7 +47,7 @@ dependencies {
     implementation(libs.glide)
     implementation(libs.cardview)
     implementation (libs.firebase.firestore)
-
+    implementation(libs.appcompat.v170)
 
 
     testImplementation(libs.junit)

@@ -22,4 +22,12 @@
     <string name="end">End:</string>
     <string name="details">Details</string>
     <string name="location">Location:</string>
+    <string name="search">Search</string>
+    <string name="profile">Profile</string>
+    <string name="my_teams">My Teams</string>
+    <string name="logout_">Logout</string>
+    <string name="my_tournaments">My tournaments</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="my_tournaments_">My Tournaments</string>
+    <string name="edit">Edit</string>
 </resources>

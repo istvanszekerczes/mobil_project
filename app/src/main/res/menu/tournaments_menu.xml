@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/search_bar"
+        android:title="@string/search"
+        android:icon="@drawable/search"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"
+        app:showAsAction="ifRoom|collapseActionView" />
+
+    <item
+        android:id="@+id/profile"
+        android:title="@string/profile"
+        android:textColor="#FFFFFF"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/my_teams"
+        android:title="@string/my_teams"
+        android:textColor="#FFFFFF"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/my_tournaments"
+        android:title="@string/my_tournaments"
+        android:textColor="#FFFFFF"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/logout"
+        android:title="@string/logout_"
+        android:textColor="#FFFFFF"
+        app:showAsAction="never" />
+</menu>
