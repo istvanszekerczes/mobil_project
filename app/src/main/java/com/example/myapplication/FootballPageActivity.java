@@ -5,25 +5,30 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.firebase.Firebase;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class FootballPageActivity extends AppCompatActivity {
     private FirebaseUser user;
+    private RecyclerView recyclerView;
+    private ArrayList<Tournament> tournamentList;
+    private TournamentAdapter mAdapter;
 
     private SharedPreferences sharedPreferences;
     private static final String PREF_KEY = FootballPageActivity.class.getPackage().toString();
     private static final String LOG_TAG = FootballPageActivity.class.getName();
     private static final int SECRET_KEY = 99;
+    private int gridNumber = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,9 +45,35 @@ public class FootballPageActivity extends AppCompatActivity {
             Log.d(LOG_TAG, "Unauthenticated user.");
             finish();
         }
+        recyclerView = findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new GridLayoutManager(this, gridNumber));
+        tournamentList = new ArrayList<>();
+        mAdapter = new TournamentAdapter(this, tournamentList);
+        recyclerView.setAdapter(mAdapter);
 
+        initializeData();
 
+    }
 
+    private void initializeData() {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("tournaments")
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        List<String> names = new ArrayList<>();
+                        List<String> locations = new ArrayList<>();
+                        List<String> startDates = new ArrayList<>();
+                        List<String> endDates = new ArrayList<>();
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            tournamentList.add(new Tournament(document.getString("name"), document.getString("location"),
+                                    document.getString("startDate"), document.getString("endDate")));
+                            mAdapter.notifyDataSetChanged();
+                        }
+                    } else {
+                        Log.w(LOG_TAG, "Error getting documents.", task.getException());
+                    }
+                });
     }
 
     public void exit(View view) {
@@ -52,7 +83,7 @@ public class FootballPageActivity extends AppCompatActivity {
     public void logout(View view) {
         FirebaseAuth.getInstance().signOut();
 
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, LoginActivity.class);
 
         Log.i(LOG_TAG, "Logged out successfully!");
 

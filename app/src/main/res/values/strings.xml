@@ -15,4 +15,11 @@
     <string name="logout">Logout</string>
     <string name="exit">Exit</string>
     <string name="guest">Guest</string>
+    <string name="tournament_detailed_description">Tournament detailed description...</string>
+    <string name="tournament_name">Tournament name</string>
+    <string name="organiser">Organiser</string>
+    <string name="start">Start:</string>
+    <string name="end">End:</string>
+    <string name="details">Details</string>
+    <string name="location">Location:</string>
 </resources>

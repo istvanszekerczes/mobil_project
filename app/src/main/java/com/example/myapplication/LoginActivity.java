@@ -15,20 +15,19 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class MainActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     EditText emailEditText;
     EditText passwordEditText;
 
     private SharedPreferences sharedPreferences;
-    private static final String PREF_KEY = MainActivity.class.getPackage().toString();
-    private static final String LOG_TAG = MainActivity.class.getName();
+    private static final String PREF_KEY = LoginActivity.class.getPackage().toString();
+    private static final String LOG_TAG = LoginActivity.class.getName();
     private static final int SECRET_KEY = 99;
 
     @Override
@@ -64,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
                     goToFootballPage();
                 } else {
                     Log.d(LOG_TAG, "User wasn't logged in succesfully!");
-                    Toast.makeText(MainActivity.this, "Incorrect credentials. Please try again!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginActivity.this, "Incorrect credentials. Please try again!", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -83,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
                     goToFootballPage();
                 } else {
                     Log.d(LOG_TAG, "Anonymous user wasn't logged in succesfully!");
-                    Toast.makeText(MainActivity.this, "User wasn't created succesfully: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginActivity.this, "User wasn't created succesfully: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -141,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Animation rotateAnimation = AnimationUtils.loadAnimation(MainActivity.this, R.anim.rotate);
+                Animation rotateAnimation = AnimationUtils.loadAnimation(LoginActivity.this, R.anim.rotate);
                 imageView.startAnimation(rotateAnimation);
             }
         }, 1000);
