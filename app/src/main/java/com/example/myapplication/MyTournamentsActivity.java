@@ -87,37 +87,76 @@ public class MyTournamentsActivity extends AppCompatActivity {
 
     private void initializeData() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser(); // Get the current user
 
-        DocumentReference userRef = db.collection("users").document(user.getUid());
-        userRef.get().addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                DocumentSnapshot document = task.getResult();
-                userName = document.getString("username");
-            } else {
-                Log.e(LOG_TAG, "Error getting document: ", task.getException());
-            }
-        });
+        if (user != null) { // Check if user is not null
+            String userId = user.getUid(); // Get user ID
+            DocumentReference userRef = db.collection("users").document(userId);
 
+            userRef.get().addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        String userName = document.getString("username"); // Get username
+                        if (userName != null) {
+                            Log.d(LOG_TAG, "User Name: " + userName);
+                            // Now, fetch tournaments and filter
+                            fetchTournaments(db, userName);
+                        } else {
+                            Log.e(LOG_TAG, "Username is null");
+                            // Handle the error:  Username is null in database.
+                            // Display a user-friendly message or take appropriate action.
+                            fetchTournaments(db, ""); // Or some default to avoid crash
+                        }
+                    } else {
+                        Log.e(LOG_TAG, "User document does not exist");
+                        // Handle the error: User document does not exist.
+                        fetchTournaments(db, "");
+                    }
+                } else {
+                    Log.e(LOG_TAG, "Error getting user document: ", task.getException());
+                    // Handle the error:  Failed to get user document.
+                    fetchTournaments(db, "");
+                }
+            });
+        } else {
+            Log.e(LOG_TAG, "No user logged in");
+            // Handle the error: No user logged in.  Maybe redirect to login.
+            //  For now,  load without filtering.
+            fetchTournaments(db, "");
+        }
+    }
+
+    private void fetchTournaments(FirebaseFirestore db, String userName) {
         db.collection("tournaments")
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        if (task.getResult() != null) { // added null check
+                        if (task.getResult() != null) {
+                            tournamentList.clear(); // Clear the list before adding new data
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                if (document.getString("organiser").equals(userName)) {
-                                    Log.d(LOG_TAG, "Document snapshot data: " + document.getData().toString());
-                                    tournamentList.add(new Tournament(document.getString("name"), document.getString("location"),
-                                            document.getString("startDate"), document.getString("endDate"), document.getString("description")));
-                                    mAdapter.notifyDataSetChanged();
+                                String organiser = document.getString("organiser");
+                                if (organiser != null && organiser.equals(userName)) {
+                                    Log.d(LOG_TAG, "Tournament found: " + document.getData().toString());
+                                    Tournament tournament = new Tournament(
+                                            document.getString("name"),
+                                            document.getString("location"),
+                                            document.getString("startDate"),
+                                            document.getString("endDate"),
+                                            document.getString("description")
+                                    );
+                                    tournamentList.add(tournament);
                                 }
                             }
+                            mAdapter.notifyDataSetChanged(); // Notify the adapter after all data is added
                         }
                     } else {
-                        Log.w(LOG_TAG, "Error getting documents.", task.getException());
+                        Log.w(LOG_TAG, "Error getting tournaments.", task.getException());
+                        // Handle the error:  Failed to get tournaments
                     }
-
                 });
     }
+
 
     public void goToCreateTournament(View view) {
         startActivity(new Intent(this, CreateTournamentActivity.class).putExtra("LOG_TAG", LOG_TAG));

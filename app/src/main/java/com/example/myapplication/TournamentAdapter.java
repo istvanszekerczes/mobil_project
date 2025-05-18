@@ -87,6 +87,7 @@ public class TournamentAdapter  extends RecyclerView.Adapter<TournamentAdapter.V
         private TextView location;
         private TextView startDate;
         private TextView endDate;
+        private TextView description;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -94,13 +95,7 @@ public class TournamentAdapter  extends RecyclerView.Adapter<TournamentAdapter.V
             this.location = itemView.findViewById(R.id.location);
             this.startDate = itemView.findViewById(R.id.startDate);
             this.endDate = itemView.findViewById(R.id.endDate);
-
-            itemView.findViewById(R.id.goToEdit).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Log.i(this.getClass().getName(), "Details button clicked");
-                }
-            });
+            this.description = itemView.findViewById(R.id.description);
         }
 
         public void bindTo(Tournament currentTournament) {
@@ -108,6 +103,7 @@ public class TournamentAdapter  extends RecyclerView.Adapter<TournamentAdapter.V
             location.setText(currentTournament.getLocation());
             startDate.setText(currentTournament.getStartDate().toString());
             endDate.setText(currentTournament.getEndDate().toString());
+            description.setText(currentTournament.getDescription().toString());
 
         }
     }
