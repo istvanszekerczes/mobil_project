@@ -66,7 +66,7 @@ public class TournamentAdapter  extends RecyclerView.Adapter<TournamentAdapter.V
         holder.bindTo(currentTournament);
 
         if (holder.getAdapterPosition() > lastPosition) {
-            Animation animation = AnimationUtils.loadAnimation(context, R.anim.slide_in_row);
+            Animation animation = AnimationUtils.loadAnimation(context, R.anim.slide_in_down);
             holder.itemView.startAnimation(animation);
             lastPosition = holder.getAdapterPosition();
         }

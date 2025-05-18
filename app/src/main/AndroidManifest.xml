@@ -13,7 +13,13 @@
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="31">
         <activity
-            android:name=".TournamentActivity"
+            android:name=".DetailedTournamentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CreateTournamentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MyTournamentsActivity"
             android:exported="false" />
         <activity
             android:name=".ProfileActivity"

@@ -7,17 +7,17 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
-
-import com.example.myapplication.R;
-
+import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.graphics.Insets;
 import androidx.core.view.MenuItemCompat;
-import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -28,7 +28,8 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class DetailedTournamentActivity extends AppCompatActivity {
+
     private FirebaseUser user;
     private RecyclerView recyclerView;
     private ArrayList<Tournament> tournamentList;
@@ -39,17 +40,28 @@ public class MainActivity extends AppCompatActivity {
     private static final String LOG_TAG = MainActivity.class.getName();
     private static final int SECRET_KEY = 99;
     private int gridNumber = 1;
+    String userName;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
 
-        setContentView(R.layout.activity_main_page);
+        setContentView(R.layout.activity_detailed_tournament);
 
-        Log.i(LOG_TAG, "onCreate");
+        Log.i(LOG_TAG, "onCreate MYTOURNAMENTSACTIVITY");
 
         user = FirebaseAuth.getInstance().getCurrentUser();
+
+        assert user != null;
+        if (user.isAnonymous()) {
+            Toast.makeText(this, "Login to access this feature!", Toast.LENGTH_SHORT).show();
+            Log.i(LOG_TAG, "Guest user has no profile!.");
+            startActivity(new Intent(this, MainActivity.class).putExtra("SECRET_KEY", SECRET_KEY));
+            finish();
+            return;
+        }
 
         if (user != null) {
             Log.d(LOG_TAG, "Authenticated user.");
@@ -63,36 +75,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-
-        recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new GridLayoutManager(this, gridNumber));
-        tournamentList = new ArrayList<>();
-        mAdapter = new TournamentAdapter(this, tournamentList);
-        recyclerView.setAdapter(mAdapter);
-
-        initializeData();
-
-    }
-
-    private void initializeData() {
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("tournaments")
-                .get()
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        if(task.getResult() != null) { // added null check
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Log.d(LOG_TAG, "Document snapshot data: " + document.getData().toString());
-                                tournamentList.add(new Tournament(document.getString("name"), document.getString("location"),
-                                        document.getString("startDate"), document.getString("endDate"), document.getString("description")));
-                                mAdapter.notifyDataSetChanged();
-                            }
-                        }
-                    } else {
-                        Log.w(LOG_TAG, "Error getting documents.", task.getException());
-                    }
-
-                });
+        //TODO: szedd ki queryvel az adatokat és állítsd is be őket
     }
 
     @Override
@@ -136,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
             return true;
         } else if (id == R.id.my_teams) {
             Log.i(LOG_TAG, "Clicked my_teams menu option.");
-            // startActivity(new Intent(this, MyTeamsActivity.class));  // You need to create MyTeamsActivity
+            // startActivity(new Intent(this, MyTeamsActivity.class));
             return true;
         } else if (id == R.id.my_tournaments) {
             Log.i(LOG_TAG, "Clicked my_tournaments menu option.");
@@ -144,6 +127,7 @@ public class MainActivity extends AppCompatActivity {
             return true;
         } else if (id == R.id.home) {
             Log.i(LOG_TAG, "Clicked home menu option.");
+            startActivity(new Intent(this, MainActivity.class).putExtra("SECRET_KEY", SECRET_KEY));
             return true;
         }   else {
             return super.onOptionsItemSelected(item);
@@ -205,5 +189,5 @@ public class MainActivity extends AppCompatActivity {
         super.onRestart();
         Log.i(LOG_TAG, "onRestart ");
     }
-}
 
+}

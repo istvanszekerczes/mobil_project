@@ -7,12 +7,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
-
-import com.example.myapplication.R;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
@@ -22,13 +20,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MyTournamentsActivity extends AppCompatActivity {
     private FirebaseUser user;
     private RecyclerView recyclerView;
     private ArrayList<Tournament> tournamentList;
@@ -39,17 +39,28 @@ public class MainActivity extends AppCompatActivity {
     private static final String LOG_TAG = MainActivity.class.getName();
     private static final int SECRET_KEY = 99;
     private int gridNumber = 1;
+    String userName;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
 
-        setContentView(R.layout.activity_main_page);
+        setContentView(R.layout.activity_tournament);
 
-        Log.i(LOG_TAG, "onCreate");
+        Log.i(LOG_TAG, "onCreate MYTOURNAMENTSACTIVITY");
 
         user = FirebaseAuth.getInstance().getCurrentUser();
+
+        assert user != null;
+        if (user.isAnonymous()) {
+            Toast.makeText(this, "Login to access this feature!", Toast.LENGTH_SHORT).show();
+            Log.i(LOG_TAG, "Guest user has no profile!.");
+            startActivity(new Intent(this, MainActivity.class).putExtra("SECRET_KEY", SECRET_KEY));
+            finish();
+            return;
+        }
 
         if (user != null) {
             Log.d(LOG_TAG, "Authenticated user.");
@@ -64,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
 
-        recyclerView = findViewById(R.id.recyclerView);
+        recyclerView = findViewById(R.id.tournamentsRecyclerView);
         recyclerView.setLayoutManager(new GridLayoutManager(this, gridNumber));
         tournamentList = new ArrayList<>();
         mAdapter = new TournamentAdapter(this, tournamentList);
@@ -76,16 +87,29 @@ public class MainActivity extends AppCompatActivity {
 
     private void initializeData() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        DocumentReference userRef = db.collection("users").document(user.getUid());
+        userRef.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                DocumentSnapshot document = task.getResult();
+                userName = document.getString("username");
+            } else {
+                Log.e(LOG_TAG, "Error getting document: ", task.getException());
+            }
+        });
+
         db.collection("tournaments")
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        if(task.getResult() != null) { // added null check
+                        if (task.getResult() != null) { // added null check
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                Log.d(LOG_TAG, "Document snapshot data: " + document.getData().toString());
-                                tournamentList.add(new Tournament(document.getString("name"), document.getString("location"),
-                                        document.getString("startDate"), document.getString("endDate"), document.getString("description")));
-                                mAdapter.notifyDataSetChanged();
+                                if (document.getString("organiser").equals(userName)) {
+                                    Log.d(LOG_TAG, "Document snapshot data: " + document.getData().toString());
+                                    tournamentList.add(new Tournament(document.getString("name"), document.getString("location"),
+                                            document.getString("startDate"), document.getString("endDate"), document.getString("description")));
+                                    mAdapter.notifyDataSetChanged();
+                                }
                             }
                         }
                     } else {
@@ -93,6 +117,25 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                 });
+    }
+
+    public void goToCreateTournament(View view) {
+        startActivity(new Intent(this, CreateTournamentActivity.class).putExtra("LOG_TAG", LOG_TAG));
+    }
+
+    public void exit(View view) {
+        finishAffinity();
+    }
+
+    public void logout(View view) {
+        FirebaseAuth.getInstance().signOut();
+
+        Intent intent = new Intent(this, LoginActivity.class);
+
+        Log.i(LOG_TAG, "Logged out successfully!");
+
+        startActivity(intent);
+        finish();
     }
 
     @Override
@@ -140,10 +183,10 @@ public class MainActivity extends AppCompatActivity {
             return true;
         } else if (id == R.id.my_tournaments) {
             Log.i(LOG_TAG, "Clicked my_tournaments menu option.");
-            startActivity(new Intent(this, MyTournamentsActivity.class));
             return true;
         } else if (id == R.id.home) {
             Log.i(LOG_TAG, "Clicked home menu option.");
+            startActivity(new Intent(this, MainActivity.class));
             return true;
         }   else {
             return super.onOptionsItemSelected(item);
@@ -153,21 +196,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         return super.onPrepareOptionsMenu(menu);
-    }
-
-    public void exit(View view) {
-        finishAffinity();
-    }
-
-    public void logout(View view) {
-        FirebaseAuth.getInstance().signOut();
-
-        Intent intent = new Intent(this, LoginActivity.class);
-
-        Log.i(LOG_TAG, "Logged out successfully!");
-
-        startActivity(intent);
-        finish();
     }
 
     @Override
@@ -206,4 +234,3 @@ public class MainActivity extends AppCompatActivity {
         Log.i(LOG_TAG, "onRestart ");
     }
 }
-

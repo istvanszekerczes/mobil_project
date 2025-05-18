@@ -14,7 +14,7 @@ public class Tournament {
     private String location;
     private int numberOfTeams;
     private int maxNumberOfTeams;
-    private ArrayList<Team> registeredTeams;
+    private ArrayList<String> registeredTeams;
 
     public Tournament(String name, String location, String startDate, String endDate,
                       FirebaseUser organiser, String info, int maxNumberOfTeams) {
@@ -27,11 +27,12 @@ public class Tournament {
         this.maxNumberOfTeams = maxNumberOfTeams;
     }
 
-    public Tournament(String name, String location, String startDate, String endDate) {
+    public Tournament(String name, String location, String startDate, String endDate, String description) {
         this.name = name;
         this.location = location;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.description = description;
     }
 
     public String getEndDate() {
@@ -90,11 +91,11 @@ public class Tournament {
         this.location = location;
     }
 
-    public ArrayList<Team> getRegisteredTeams() {
+    public ArrayList<String> getRegisteredTeams() {
         return registeredTeams;
     }
 
-    public void setRegisteredTeams(ArrayList<Team> registeredTeams) {
+    public void setRegisteredTeams(ArrayList<String> registeredTeams) {
         this.registeredTeams = registeredTeams;
     }
 
