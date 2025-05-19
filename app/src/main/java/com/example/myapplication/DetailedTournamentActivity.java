@@ -50,7 +50,7 @@ public class DetailedTournamentActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_detailed_tournament);
 
-        Log.i(LOG_TAG, "onCreate MYTOURNAMENTSACTIVITY");
+        Log.i(LOG_TAG, "onCreate");
 
         user = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -75,7 +75,6 @@ public class DetailedTournamentActivity extends AppCompatActivity {
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        //TODO: szedd ki queryvel az adatokat és állítsd is be őket
     }
 
     @Override

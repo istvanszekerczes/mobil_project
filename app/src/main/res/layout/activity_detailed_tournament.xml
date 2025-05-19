@@ -20,15 +20,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ScrollView
-        android:id="@+id/scrollView"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:fillViewport="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="#333333"
+        app:cardCornerRadius="8dp"
+        android:layout_margin="8dp"
+        android:layout_marginTop="0dp"  app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" > <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -38,11 +43,11 @@
             <TextView
                 android:id="@+id/detailName"
                 android:layout_width="0dp"
+                android:textColor="@color/white"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text=""
                 android:textAlignment="center"
-                android:textColor="#FFFFFF"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -50,63 +55,35 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/detailOrganiserLabelLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:text="@string/organiser_"
-                android:textColor="#BDBDBD"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/detailName" />
-
-            <TextView
-                android:id="@+id/detailOrganiser"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="@+id/detailOrganiserLabelLabel"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/detailOrganiserLabelLabel"
-                app:layout_constraintTop_toTopOf="@+id/detailOrganiserLabelLabel"
-                android:text="" />
-
-            <TextView
                 android:id="@+id/detailLocationLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="@string/location_"
-                android:textColor="#BDBDBD"
-                android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/detailOrganiserLabelLabel" />
+                android:textColor="@color/white"
+                app:layout_constraintTop_toBottomOf="@+id/detailName" />
 
             <TextView
                 android:id="@+id/detailLocation"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="@+id/detailLocationLabel"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/detailLocationLabel"
                 app:layout_constraintTop_toTopOf="@+id/detailLocationLabel"
-                android:text="" />
+                android:textColor="@color/white"
+                tools:text="" />
 
             <TextView
                 android:id="@+id/detailStartDateLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:text="@string/start_date_"
-                android:textColor="#BDBDBD"
-                android:textSize="16sp"
+                android:textColor="@color/white"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/detailLocationLabel" />
@@ -114,24 +91,23 @@
             <TextView
                 android:id="@+id/detailStartDate"
                 android:layout_width="0dp"
+
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp"
+                android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="@+id/detailStartDateLabel"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/detailStartDateLabel"
                 app:layout_constraintTop_toTopOf="@+id/detailStartDateLabel"
-                android:text="" />
+                tools:text="" />
 
             <TextView
                 android:id="@+id/detailEndDateLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:text="@string/end_date_"
-                android:textColor="#BDBDBD"
-                android:textSize="16sp"
+                android:textColor="@color/white"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/detailStartDateLabel" />
@@ -141,22 +117,20 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="@+id/detailEndDateLabel"
                 app:layout_constraintEnd_toEndOf="parent"
+                android:textColor="@color/white"
                 app:layout_constraintStart_toEndOf="@+id/detailEndDateLabel"
                 app:layout_constraintTop_toTopOf="@+id/detailEndDateLabel"
-                android:text="" />
+                tools:text="" />
 
             <TextView
                 android:id="@+id/detailMaxTeamsLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/max_teams_"
-                android:textColor="#BDBDBD"
-                android:textSize="16sp"
+                android:layout_marginTop="8dp"
+                android:text="@string/max_teams__"
+                android:textColor="@color/white"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/detailEndDateLabel" />
@@ -166,22 +140,20 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="@+id/detailMaxTeamsLabel"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/detailMaxTeamsLabel"
                 app:layout_constraintTop_toTopOf="@+id/detailMaxTeamsLabel"
-                android:text="" />
+                android:textColor="@color/white"
+                tools:text="" />
 
             <TextView
                 android:id="@+id/detailDescriptionLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="8dp"
                 android:text="@string/description_"
-                android:textColor="#BDBDBD"
-                android:textSize="16sp"
+                android:textColor="@color/white"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/detailMaxTeamsLabel" />
@@ -191,14 +163,36 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
+                android:textColor="@color/white"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/detailDescriptionLabel"
-                android:text="" />
+                tools:text="" />
+
+            <TextView
+                android:id="@+id/detailOrganiserLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/organiser_"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/detailDescription" />
+
+            <TextView
+                android:id="@+id/detailOrganiser"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                app:layout_constraintBottom_toBottomOf="@+id/detailOrganiserLabel"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toEndOf="@+id/detailOrganiserLabel"
+                app:layout_constraintTop_toTopOf="@+id/detailOrganiserLabel"
+                tools:text="" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
-
+    </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

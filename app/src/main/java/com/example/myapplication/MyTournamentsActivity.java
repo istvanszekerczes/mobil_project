@@ -83,6 +83,21 @@ public class MyTournamentsActivity extends AppCompatActivity {
 
         initializeData();
 
+        mAdapter.setOnItemClickListener(new TournamentAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                Tournament clickedTournament = tournamentList.get(position);
+                Log.d(LOG_TAG, "Details gomb megnyomva a pozíción: " + position + ", Név: " + clickedTournament.getName());
+                Toast.makeText(MyTournamentsActivity.this, "Részletek: " + clickedTournament.getName(), Toast.LENGTH_SHORT).show();
+
+                Intent detailsIntent = new Intent(MyTournamentsActivity.this, EditTournamentActivity.class);
+                detailsIntent.putExtra("documentId", clickedTournament.getDocumentId());
+                detailsIntent.putExtra("LOG_TAG", LOG_TAG);
+                detailsIntent.putExtra("FROM", MyTournamentsActivity.class.getName());
+                startActivity(detailsIntent);
+            }
+        });
+
     }
 
     private void initializeData() {

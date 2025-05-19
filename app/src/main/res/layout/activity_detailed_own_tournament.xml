@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#424242"
+    tools:context=".TournamentDetailsActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="0dp"
+        android:layout_height="75dp"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:paddingTop="16dp"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="#333333"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintVertical_bias="0.1"
+        android:layout_margin="8dp"
+        android:layout_marginTop="16dp">
+
+        <ScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fillViewport="true">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/detailName"
+                    android:layout_width="0dp"
+                    android:textColor="@color/white"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text=""
+                    android:textAlignment="center"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/detailLocationLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/location_"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:textColor="@color/white"
+                    app:layout_constraintTop_toBottomOf="@+id/detailName" />
+
+                <TextView
+                    android:id="@+id/detailLocation"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/detailLocationLabel"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/detailLocationLabel"
+                    app:layout_constraintTop_toTopOf="@+id/detailLocationLabel"
+                    android:textColor="@color/white"
+
+                    tools:text="" />
+
+                <TextView
+                    android:id="@+id/detailStartDateLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/start_date_"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/detailLocationLabel" />
+
+                <TextView
+                    android:id="@+id/detailStartDate"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:textColor="@color/white"
+
+                    app:layout_constraintBottom_toBottomOf="@+id/detailStartDateLabel"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/detailStartDateLabel"
+                    app:layout_constraintTop_toTopOf="@+id/detailStartDateLabel"
+                    tools:text="" />
+
+                <TextView
+                    android:id="@+id/detailEndDateLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/end_date_"
+                    android:textColor="@color/white"
+
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/detailStartDateLabel" />
+
+                <TextView
+                    android:id="@+id/detailEndDate"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/detailEndDateLabel"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:textColor="@color/white"
+
+                    app:layout_constraintStart_toEndOf="@+id/detailEndDateLabel"
+                    app:layout_constraintTop_toTopOf="@+id/detailEndDateLabel"
+                    tools:text="" />
+
+                <TextView
+                    android:id="@+id/detailMaxTeamsLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/max_teams__"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/detailEndDateLabel" />
+
+                <TextView
+                    android:id="@+id/detailMaxTeams"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/detailMaxTeamsLabel"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/detailMaxTeamsLabel"
+                    app:layout_constraintTop_toTopOf="@+id/detailMaxTeamsLabel"
+                    android:textColor="@color/white"
+
+                    tools:text="" />
+
+                <TextView
+                    android:id="@+id/detailDescriptionLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/description_"
+                    android:textColor="@color/white"
+
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/detailMaxTeamsLabel" />
+
+                <TextView
+                    android:id="@+id/detailDescription"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:textColor="@color/white"
+
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/detailDescriptionLabel"
+                    tools:text="" />
+
+                <TextView
+                    android:id="@+id/detailOrganiserLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/organiser_"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/detailDescription" />
+
+                <TextView
+                    android:id="@+id/detailOrganiser"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/detailOrganiserLabel"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:textColor="@color/white"
+
+                    app:layout_constraintStart_toEndOf="@+id/detailOrganiserLabel"
+                    app:layout_constraintTop_toTopOf="@+id/detailOrganiserLabel"
+                    tools:text="" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/exitButton"
+                    android:layout_width="150dp"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginBottom="40dp"
+                    android:background="@drawable/btn_green"
+                    android:gravity="center"
+                    android:onClick="goToEdit"
+                    android:padding="10dp"
+                    android:text="@string/edit"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.498"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/detailOrganiser"
+                    app:layout_constraintVertical_bias="1.0"
+                    tools:ignore="OnClick" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

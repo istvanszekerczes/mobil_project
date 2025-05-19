@@ -37,6 +37,7 @@ public class TournamentDetailsActivity extends AppCompatActivity {
     private TextView detailEndDate;
     private TextView detailMaxTeams;
     private TextView detailDescription;
+    private String documentId;
 
     private FirebaseUser user;
     private SharedPreferences sharedPreferences;
@@ -47,7 +48,7 @@ public class TournamentDetailsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tournament_details);
+        setContentView(R.layout.activity_detailed_tournament);
 
         Log.i(LOG_TAG, "onCreate");
 
@@ -75,7 +76,7 @@ public class TournamentDetailsActivity extends AppCompatActivity {
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        String documentId = getIntent().getStringExtra("documentId");
+        documentId = getIntent().getStringExtra("documentId");
 
         if (documentId != null) {
             loadTournamentDetails(documentId);
@@ -241,5 +242,11 @@ public class TournamentDetailsActivity extends AppCompatActivity {
     protected void onRestart() {
         super.onRestart();
         Log.i(LOG_TAG, "onRestart ");
+    }
+
+    public void goToEdit(View view) {
+        Intent intent = new Intent();
+        intent.putExtra("LOG_TAG", LOG_TAG);
+        intent.putExtra("documentId", documentId);
     }
 }

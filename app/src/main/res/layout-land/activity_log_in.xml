@@ -94,37 +94,37 @@
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/loginButton"
                         android:layout_width="0dp"
-                        android:layout_height="match_parent"
+                        android:layout_height="45dp"
                         android:layout_weight="1"
                         android:layout_marginEnd="8dp"
                         android:background="@drawable/btn_green"
                         android:onClick="login"
                         android:text="@string/login"
                         android:textColor="#FFFFFF"
-                        android:textSize="18sp" />
+                        android:textSize="16sp" />
 
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/loginAsGuestButton"
                         android:layout_width="0dp"
-                        android:layout_height="match_parent"
+                        android:layout_height="45dp"
                         android:layout_weight="1"
                         android:layout_marginStart="8dp"
                         android:background="@drawable/btn_green"
                         android:onClick="loginAsGuest"
                         android:text="@string/guest"
                         android:textColor="#FFFFFF"
-                        android:textSize="18sp" />
+                        android:textSize="16sp" />
                 </LinearLayout>
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/registerButton"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
+                    android:layout_height="45dp"
                     android:background="@drawable/btn_green"
                     android:onClick="signUp"
                     android:text="@string/sign_up"
                     android:textColor="#FFFFFF"
-                    android:textSize="18sp" />
+                    android:textSize="16sp" />
             </LinearLayout>
         </ScrollView>
     </LinearLayout>

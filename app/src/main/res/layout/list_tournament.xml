@@ -18,7 +18,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            >
 
             <TextView
                 android:id="@+id/name"
@@ -66,10 +67,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:text="@string/start"
-                android:textStyle="bold"
                 android:textColor="#FFFFFF"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/locationLabel" />
 
@@ -93,8 +94,8 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:text="@string/end"
-                android:textStyle="bold"
                 android:textColor="#FFFFFF"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/startDateLabel" />
 
@@ -115,10 +116,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:text="@string/description"
-                android:textStyle="bold"
+                android:layout_marginTop="8dp"
+                android:text="@string/description_"
                 android:textColor="#FFFFFF"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/endDateLabel" />
 
@@ -138,7 +139,7 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/descriptionLabel"
-                app:layout_constraintVertical_bias="0.058" />
+                app:layout_constraintVertical_bias="0.0" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/detailsButton"
@@ -150,10 +151,10 @@
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/btn_green"
                 android:gravity="center"
-                android:padding="10dp"
+                android:padding="5dp"
                 android:text="@string/details"
                 android:textColor="#FFFFFF"
-                android:textSize="18sp"
+                android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
