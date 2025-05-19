@@ -1,12 +1,12 @@
 package com.example.myapplication;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
@@ -16,17 +16,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class TournamentAdapter  extends RecyclerView.Adapter<TournamentAdapter.ViewHolder> implements Filterable {
+public class TournamentAdapter extends RecyclerView.Adapter<TournamentAdapter.ViewHolder> implements Filterable {
     private ArrayList<Tournament> mTournamentsData;
     private ArrayList<Tournament> mTournamentsDataAll;
     private Context context;
     private int lastPosition = -1;
+    private OnItemClickListener mListener;
     private Filter tournamentFilter = new Filter() {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
             ArrayList<Tournament> filteredList = new ArrayList<>();
             FilterResults results = new FilterResults();
-            if (constraint == null ||constraint.length() == 0) {
+            if (constraint == null || constraint.length() == 0) {
                 results.count = mTournamentsDataAll.size();
                 results.values = mTournamentsDataAll;
             } else {
@@ -49,15 +50,26 @@ public class TournamentAdapter  extends RecyclerView.Adapter<TournamentAdapter.V
         }
     };
 
+    // Interface a gomb kattintásának kezelésére
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        mListener = listener;
+    }
+
     public TournamentAdapter(Context context, ArrayList<Tournament> tournamentData) {
         this.mTournamentsData = tournamentData;
         this.mTournamentsDataAll = tournamentData;
         this.context = context;
     }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.list_tournament, parent, false));
+        View itemView = LayoutInflater.from(context).inflate(R.layout.list_tournament, parent, false);
+        return new ViewHolder(itemView, mListener); // Átadja a listener-t a ViewHolder-nak
     }
 
     @Override
@@ -82,20 +94,34 @@ public class TournamentAdapter  extends RecyclerView.Adapter<TournamentAdapter.V
         return tournamentFilter;
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         private TextView name;
         private TextView location;
         private TextView startDate;
         private TextView endDate;
         private TextView description;
+        private Button detailsButton;
 
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
             super(itemView);
             this.name = itemView.findViewById(R.id.name);
             this.location = itemView.findViewById(R.id.location);
             this.startDate = itemView.findViewById(R.id.startDate);
             this.endDate = itemView.findViewById(R.id.endDate);
             this.description = itemView.findViewById(R.id.description);
+            this.detailsButton = itemView.findViewById(R.id.detailsButton);
+
+            detailsButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            listener.onItemClick(position);
+                        }
+                    }
+                }
+            });
         }
 
         public void bindTo(Tournament currentTournament) {
@@ -104,9 +130,6 @@ public class TournamentAdapter  extends RecyclerView.Adapter<TournamentAdapter.V
             startDate.setText(currentTournament.getStartDate().toString());
             endDate.setText(currentTournament.getEndDate().toString());
             description.setText(currentTournament.getDescription().toString());
-
         }
     }
-
 }
-

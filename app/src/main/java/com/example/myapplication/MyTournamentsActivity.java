@@ -139,6 +139,7 @@ public class MyTournamentsActivity extends AppCompatActivity {
                                 if (organiser != null && organiser.equals(userName)) {
                                     Log.d(LOG_TAG, "Tournament found: " + document.getData().toString());
                                     Tournament tournament = new Tournament(
+                                            document.getId(),
                                             document.getString("name"),
                                             document.getString("location"),
                                             document.getString("startDate"),

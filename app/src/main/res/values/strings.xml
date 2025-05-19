@@ -42,4 +42,11 @@
     <string name="number_of_teams">Number of teams</string>
     <string name="create">Create</string>
     <string name="max_number_of_teams">Max number of teams:</string>
+    <string name="location_">Location:</string>
+    <string name="start_date_">Start date:</string>
+    <string name="end_date_">End date:</string>
+    <string name="max_teams_">Max teams:</string>
+    <string name="description_">Description:</string>
+    <string name="organiser_">Organiser:</string>
+    <string name="max_teams__">Max teams:</string>
 </resources>

@@ -6,9 +6,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Tournament {
+    private String documentId;
     private String name;
     private String description;
-    private FirebaseUser organiser;
+    private String organiser;
     private String startDate;
     private String endDate;
     private String location;
@@ -17,7 +18,7 @@ public class Tournament {
     private ArrayList<String> registeredTeams;
 
     public Tournament(String name, String location, String startDate, String endDate,
-                      FirebaseUser organiser, String info, int maxNumberOfTeams) {
+                      String organiser, String info, int maxNumberOfTeams) {
         this.name = name;
         this.location = location;
         this.startDate = startDate;
@@ -27,15 +28,18 @@ public class Tournament {
         this.maxNumberOfTeams = maxNumberOfTeams;
     }
 
-    public Tournament(String name, String location, String startDate, String endDate, String description) {
+    public Tournament(String documentId, String name, String location, String startDate, String endDate, String description) {
+        this.documentId = documentId;
         this.name = name;
         this.location = location;
         this.startDate = startDate;
         this.endDate = endDate;
         this.description = description;
     }
+    public Tournament() {
+    }
 
-    public String getEndDate() {
+        public String getEndDate() {
         return endDate;
     }
 
@@ -59,6 +63,14 @@ public class Tournament {
         this.maxNumberOfTeams = maxNumberOfTeams;
     }
 
+    public String getDocumentId() {
+        return documentId;
+    }
+
+    public void setDocumentId(String documentId) {
+        this.documentId = documentId;
+    }
+
     public String getName() {
         return name;
     }
@@ -75,11 +87,11 @@ public class Tournament {
         this.numberOfTeams = numberOfTeams;
     }
 
-    public FirebaseUser getOrganiser() {
+    public String getOrganiser() {
         return organiser;
     }
 
-    public void setOrganiser(FirebaseUser organiser) {
+    public void setOrganiser(String organiser) {
         this.organiser = organiser;
     }
 
