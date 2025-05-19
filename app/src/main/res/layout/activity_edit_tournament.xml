@@ -150,15 +150,15 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/createButton"
-                android:layout_width="150dp"
-                android:layout_height="60dp"
+                android:layout_width="115dp"
+                android:layout_height="45dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/btn_green"
                 android:gravity="center"
                 android:text="@string/update"
                 android:textColor="#FFFFFF"
-                android:textSize="18sp"
+                android:textSize="12sp"
                 android:onClick="updateTournament"
                 app:layout_constraintTop_toBottomOf="@+id/maxNumberOfTeamsEditText"
                 app:layout_constraintStart_toStartOf="parent"

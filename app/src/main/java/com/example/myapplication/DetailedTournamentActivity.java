@@ -31,15 +31,9 @@ import java.util.List;
 public class DetailedTournamentActivity extends AppCompatActivity {
 
     private FirebaseUser user;
-    private RecyclerView recyclerView;
-    private ArrayList<Tournament> tournamentList;
     private TournamentAdapter mAdapter;
-
-    private SharedPreferences sharedPreferences;
-    private static final String PREF_KEY = MainActivity.class.getPackage().toString();
     private static final String LOG_TAG = MainActivity.class.getName();
     private static final int SECRET_KEY = 99;
-    private int gridNumber = 1;
     String userName;
 
 
@@ -136,21 +130,6 @@ public class DetailedTournamentActivity extends AppCompatActivity {
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         return super.onPrepareOptionsMenu(menu);
-    }
-
-    public void exit(View view) {
-        finishAffinity();
-    }
-
-    public void logout(View view) {
-        FirebaseAuth.getInstance().signOut();
-
-        Intent intent = new Intent(this, LoginActivity.class);
-
-        Log.i(LOG_TAG, "Logged out successfully!");
-
-        startActivity(intent);
-        finish();
     }
 
     @Override

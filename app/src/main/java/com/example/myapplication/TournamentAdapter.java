@@ -50,7 +50,7 @@ public class TournamentAdapter extends RecyclerView.Adapter<TournamentAdapter.Vi
         }
     };
 
-    // Interface a gomb kattintásának kezelésére
+
     public interface OnItemClickListener {
         void onItemClick(int position);
     }
@@ -69,7 +69,7 @@ public class TournamentAdapter extends RecyclerView.Adapter<TournamentAdapter.Vi
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(context).inflate(R.layout.list_tournament, parent, false);
-        return new ViewHolder(itemView, mListener); // Átadja a listener-t a ViewHolder-nak
+        return new ViewHolder(itemView, mListener);
     }
 
     @Override

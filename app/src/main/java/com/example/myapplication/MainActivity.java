@@ -93,10 +93,11 @@ public class MainActivity extends AppCompatActivity {
     private void initializeData() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("tournaments")
+                .orderBy("startDate")
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        if(task.getResult() != null) { // added null check
+                        if(task.getResult() != null) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Log.d(LOG_TAG, "Document snapshot data: " + document.getData().toString());
                                 tournamentList.add(new Tournament(document.getId() ,document.getString("name"), document.getString("location"),
@@ -110,6 +111,7 @@ public class MainActivity extends AppCompatActivity {
 
                 });
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -152,7 +154,7 @@ public class MainActivity extends AppCompatActivity {
             return true;
         } else if (id == R.id.my_teams) {
             Log.i(LOG_TAG, "Clicked my_teams menu option.");
-            // startActivity(new Intent(this, MyTeamsActivity.class));  // You need to create MyTeamsActivity
+            // startActivity(new Intent(this, MyTeamsActivity.class));
             return true;
         } else if (id == R.id.my_tournaments) {
             Log.i(LOG_TAG, "Clicked my_tournaments menu option.");
@@ -169,21 +171,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         return super.onPrepareOptionsMenu(menu);
-    }
-
-    public void exit(View view) {
-        finishAffinity();
-    }
-
-    public void logout(View view) {
-        FirebaseAuth.getInstance().signOut();
-
-        Intent intent = new Intent(this, LoginActivity.class);
-
-        Log.i(LOG_TAG, "Logged out successfully!");
-
-        startActivity(intent);
-        finish();
     }
 
     @Override

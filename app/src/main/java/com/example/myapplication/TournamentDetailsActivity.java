@@ -52,7 +52,7 @@ public class TournamentDetailsActivity extends AppCompatActivity {
 
         Log.i(LOG_TAG, "onCreate");
 
-        // Initialize TextViews
+
         detailName = findViewById(R.id.detailName);
         detailOrganiser = findViewById(R.id.detailOrganiser);
         detailLocation = findViewById(R.id.detailLocation);
@@ -69,7 +69,7 @@ public class TournamentDetailsActivity extends AppCompatActivity {
             Log.d(LOG_TAG, "Unauthenticated user.");
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
-            finish(); // Make sure the user can't go back without logging in
+            finish();
             return;
         }
         Toolbar mToolbar = findViewById(R.id.toolbar);
@@ -83,7 +83,7 @@ public class TournamentDetailsActivity extends AppCompatActivity {
         } else {
             Log.w(LOG_TAG, "No document ID received!");
             Toast.makeText(this, "Tournament ID not found", Toast.LENGTH_SHORT).show();
-            finish(); // Close the activity if no ID is available
+            finish();
         }
     }
 
@@ -119,7 +119,7 @@ public class TournamentDetailsActivity extends AppCompatActivity {
     private void displayTournamentDetails(Tournament tournament) {
         detailName.setText(tournament.getName());
 
-        // Most közvetlenül a String-et állítjuk be
+
         if (tournament.getOrganiser() != null && !tournament.getOrganiser().isEmpty()) {
             detailOrganiser.setText(tournament.getOrganiser());
         } else {
@@ -146,7 +146,7 @@ public class TournamentDetailsActivity extends AppCompatActivity {
             }
             @Override
             public boolean onQueryTextChange(String newText) {
-                // This is for the main tournament list, not relevant here
+
                 return false;
             }
         });
@@ -171,7 +171,7 @@ public class TournamentDetailsActivity extends AppCompatActivity {
             return true;
         } else if (id == R.id.my_teams) {
             Log.i(LOG_TAG, "Clicked my_teams menu option.");
-            // startActivity(new Intent(this, MyTeamsActivity.class));  // You need to create MyTeamsActivity
+            // startActivity(new Intent(this, MyTeamsActivity.class));
             return true;
         } else if (id == R.id.my_tournaments) {
             Log.i(LOG_TAG, "Clicked my_tournaments menu option.");
@@ -188,7 +188,7 @@ public class TournamentDetailsActivity extends AppCompatActivity {
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        // Remove search bar in details view
+
         MenuItem searchItem = menu.findItem(R.id.search_bar);
         if (searchItem != null) {
             searchItem.setVisible(false);
